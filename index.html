@@ -55,6 +55,7 @@ nav button{border:1px solid var(--line);border-radius:12px;background:#fff;paddi
 nav button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .mbar{padding:12px 16px}.badge{font-size:.8rem;padding:2px 8px;border-radius:99px;font-weight:600}.badge.i{background:var(--in-bg);color:var(--in)}.badge.o{background:var(--out-bg);color:var(--out)}
 .ov{position:fixed;inset:0;background:#0007;display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}.ov[hidden]{display:none}.box{max-width:380px;width:100%;margin:0}
+.dwrap{position:relative}.dwrap #d{padding-right:46px}.cal{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;color:var(--mute);padding:6px;display:grid}#dpick{position:absolute;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;padding:0;border:0}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 #toast{z-index:60;position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
 #toast.on{opacity:1}
@@ -93,7 +94,7 @@ nav button.on{background:var(--ink);border-color:var(--ink);color:#fff}
   <form class="card" id="f" onsubmit="return false">
     <h2 id="ft">নতুন আয় যোগ করুন</h2>
     <div class="grid">
-      <div class="full"><label for="d">তারিখ</label><input type="date" id="d" required></div>
+      <div class="full"><label for="d">তারিখ (দিন/মাস/বছর)</label><div class="dwrap"><input id="d" inputmode="numeric" placeholder="DD/MM/YYYY" maxlength="10" autocomplete="off" required><button type="button" class="cal" id="calBtn" aria-label="ক্যালেন্ডার থেকে বাছুন"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><input type="date" id="dpick" tabindex="-1" aria-hidden="true"></div></div>
       <div><label for="g">প্রধান খাত</label><select id="g" required></select></div>
       <div><label for="s">উপ খাত</label><select id="s" required></select></div>
       <div id="flatBox" class="full" hidden><label for="fl">ফ্ল্যাট</label><select id="fl"></select></div>
@@ -149,7 +150,8 @@ const DB={
 const $=id=>document.getElementById(id),M=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
 const tk=n=>'৳ '+(+n||0).toLocaleString('bn-BD',{maximumFractionDigits:2});
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const bnDate=s=>new Date(s+'T00:00').toLocaleDateString('bn-BD',{day:'numeric',month:'short'});
+const bd=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const bnDate=s=>{const[y,m,d]=s.split('-');return bd(d+'-'+m+'-'+y.slice(2))+' ইং'};
 let type='income',all=[],open0=0;
 
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1800)}
@@ -179,13 +181,23 @@ $('g').onchange=setSub;
 $('fl').innerHTML=FLATS.map(f=>`<option>${f}</option>`).join('');
 
 $('save').onclick=async()=>{
- const f=$('f');if(!f.reportValidity())return;
- await DB.add({type,date:$('d').value,group:$('g').value,item:$('s').value,flat:$('flatBox').hidden?'':$('fl').value,amount:+$('a').value,note:$('n').value.trim()});
- $('a').value='';$('n').value='';setType();setMonth($('d').value.slice(0,7));
+ const f=$('f'),iso=getISO();$('d').setCustomValidity(iso?'':'সঠিক তারিখ দিন (দিন/মাস/বছর)');if(!f.reportValidity())return;
+ await DB.add({type,date:iso,group:$('g').value,item:$('s').value,flat:$('flatBox').hidden?'':$('fl').value,amount:+$('a').value,note:$('n').value.trim()});
+ $('a').value='';$('n').value='';setType();setMonth(iso.slice(0,7));
  document.querySelector('nav button[data-v=dash]').click();toast('সংরক্ষিত হয়েছে');render();
 };
 
 /* হিসাব */
+/* তারিখ: দিন/মাস/বছর ইনপুট, ভিতরে ISO (YYYY-MM-DD) */
+function getISO(){const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec($('d').value.trim());if(!m)return '';
+ const [,d,mo,y]=m,dt=new Date(+y,+mo-1,+d);
+ return dt.getFullYear()==y&&dt.getMonth()==mo-1&&dt.getDate()==d?`${y}-${mo}-${d}`:''}
+function setDateISO(v){const[y,m,d]=v.split('-');$('d').value=`${d}/${m}/${y}`;$('d').setCustomValidity('')}
+$('d').addEventListener('input',()=>{
+ const t=$('d').value.replace(/[০-৯]/g,c=>'০১২৩৪৫৬৭৮৯'.indexOf(c)).replace(/\D/g,'').slice(0,8);
+ $('d').value=t.length>4?t.slice(0,2)+'/'+t.slice(2,4)+'/'+t.slice(4):t.length>2?t.slice(0,2)+'/'+t.slice(2):t;$('d').setCustomValidity('')});
+$('dpick').onchange=()=>{if($('dpick').value)setDateISO($('dpick').value)};
+$('calBtn').onclick=()=>{$('dpick').value=getISO();try{$('dpick').showPicker()}catch(e){$('dpick').focus();$('dpick').click()}};
 const mkey=d=>d.slice(0,7);
 function calc(){
  const m=$('month').value,cur=all.filter(t=>mkey(t.date)===m),prev=all.filter(t=>mkey(t.date)<m);
@@ -262,7 +274,7 @@ const Y=now.getFullYear();
 function setMonth(v){$('month').value=v}
 $('month').onchange=render;
 setMonth(`${Y}-${z(now.getMonth()+1)}`);
-$('d').value=`${now.getFullYear()}-${z(now.getMonth()+1)}-${z(now.getDate())}`;
+setDateISO(`${now.getFullYear()}-${z(now.getMonth()+1)}-${z(now.getDate())}`);
 setType();render();
 </script>
 </body>
