@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14304a">
+<title>কাজী মোশাররফ টাওয়ার - হিসাব</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--mute:#64748b;--line:#e2e8f0;--in:#059669;--in-bg:#ecfdf5;--out:#dc2626;--out-bg:#fef2f2;--acc:var(--in);--sh:0 4px 6px -1px #0000000d,0 2px 4px -2px #0000000d}
+body.out{--acc:var(--out)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Sans Bengali',system-ui,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:24px;font-size:16px;line-height:1.5}
+header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:20px 16px;text-align:center;width:min(948px,calc(100% - 32px));margin:16px auto 0;border-radius:16px;box-shadow:0 10px 15px -3px #00000014}
+header h1{margin:0;font-size:1.1rem;font-weight:600}header small{opacity:.7;display:block;font-weight:400}
+main{max-width:980px;margin:0 auto;padding:16px}
+.view{display:none}.view.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:var(--sh)}
+h2{font-size:1.05rem;margin:0 0 12px}
+input,select,button,textarea{font:inherit;color:inherit}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+label{display:block;font-size:.88rem;color:var(--mute);margin-bottom:4px}
+.grid{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.full{grid-column:1/-1}
+.btn{border:0;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;background:var(--acc);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:#e1e8e6;border-radius:10px;padding:4px;margin-bottom:16px}
+.seg button{border:0;background:transparent;padding:10px;border-radius:8px;font-weight:600;cursor:pointer;color:var(--mute)}
+.seg button.on{background:#fff;color:var(--acc);box-shadow:0 1px 3px #0002}
+/* summary cards */
+.eq{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.eq div{position:relative;background:#fff;border:1px solid var(--line);border-top:4px solid var(--ink);border-radius:14px;padding:14px 12px;box-shadow:var(--sh)}
+.eq span{padding-right:40px}.ic{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--tb,#f1f5f9);color:var(--tc,#475569)}
+.eq .i{border-top-color:var(--in)}.eq .o{border-top-color:var(--out)}
+.eq span{display:block;font-size:.85rem;color:var(--mute)}.eq b{font-size:1.3rem;font-weight:700}
+.eq .i b{color:var(--in)}.eq .o b{color:var(--out)}
+.mbar input{max-width:220px}
+.cols{display:grid;gap:16px;grid-template-columns:1fr 1fr}
+details{border-top:1px solid var(--line);padding:8px 0}details:first-of-type{border-top:0}
+summary{cursor:pointer;display:flex;justify-content:space-between;gap:8px;font-weight:500;list-style:none}
+summary::-webkit-details-marker{display:none}
+.bar{height:5px;background:#e6ecea;border-radius:3px;margin-top:5px;overflow:hidden}.bar i{display:block;height:100%}
+.sub{display:flex;justify-content:space-between;font-size:.9rem;color:var(--mute);padding:4px 0 0 12px}
+.in-c{color:var(--in)}.out-c{color:var(--out)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mute);font-weight:500}td.n,th.n{text-align:right;white-space:nowrap}
+.wrap{overflow-x:auto}
+.empty{color:var(--mute);text-align:center;padding:20px 8px}
+.x{border:0;background:none;color:var(--mute);cursor:pointer;font-size:1.1rem}
+nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:980px;margin:14px auto 0;padding:0 16px}
+nav button{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px 8px;font-weight:600;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:var(--sh);transition:background .2s}nav button:hover{background:#f1f5f9}nav button.on:hover{background:var(--ink)}nav svg{flex:none}
+nav button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.mbar{padding:12px 16px}.badge{font-size:.8rem;padding:2px 8px;border-radius:99px;font-weight:600}.badge.i{background:var(--in-bg);color:var(--in)}.badge.o{background:var(--out-bg);color:var(--out)}
+.ov{position:fixed;inset:0;background:#0007;display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}.ov[hidden]{display:none}.box{max-width:380px;width:100%;margin:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#toast{z-index:60;position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+@media(max-width:700px){nav button{flex-direction:column;gap:4px;font-size:.8rem;padding:10px 2px}.cols,.grid{grid-template-columns:1fr}.eq{grid-template-columns:1fr 1fr}}
+@media print{header input,nav,.noprint,.seg{display:none!important}body{background:#fff;padding:0}.card{border:0;padding:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <h1>কাজী মোশাররফ টাওয়ার <small>ভবন মালিক সমিতি · আয় ও ব্যয়ের হিসাব</small></h1>
+</header>
+<nav><button class="on" data-v="dash"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>ড্যাশবোর্ড</button><button data-v="add"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m8-8H4"/></svg>আয়/ব্যয় এন্ট্রি</button><button data-v="list"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 12h6M9 16h6"/></svg>লেনদেন</button></nav>
+<main>
+<div class="card mbar" id="mbar"><label for="month">মাস নির্বাচন</label><input type="month" id="month"></div>
+<!-- ড্যাশবোর্ড -->
+<section class="view on" id="v-dash">
+  <div class="eq" id="eq"></div>
+  <div class="cols">
+    <div class="card"><h2 class="in-c">আয়ের বিবরণ</h2><div id="bd-in"></div></div>
+    <div class="card"><h2 class="out-c">ব্যয়ের বিবরণ</h2><div id="bd-out"></div></div>
+  </div>
+  <div class="card noprint" id="openCard">
+    <h2>প্রারম্ভিক জের</h2>
+    <div id="openSet" hidden>
+      <p style="margin:0 0 10px;color:var(--mute);font-size:.9rem">প্রথম এন্ট্রি যোগ করার আগে একবার সেট করুন। এন্ট্রি যোগ হলে পরিবর্তনের জন্য অ্যাডমিন পাসওয়ার্ড লাগবে।</p>
+      <div class="row"><input type="number" id="open" min="0" step="any" placeholder="৳ পরিমাণ" style="max-width:200px"><button class="btn ghost" onclick="saveOpen()">সংরক্ষণ</button></div>
+    </div>
+    <div id="openView" class="row" hidden><b id="openVal"></b><button class="btn ghost" style="margin-left:auto" onclick="editOpen()">জের সম্পাদনা</button></div>
+  </div>
+</section>
+
+<!-- নতুন এন্ট্রি -->
+<section class="view" id="v-add">
+  <div class="seg" role="tablist"><button class="on" data-t="income">আয়</button><button data-t="expense">ব্যয়</button></div>
+  <form class="card" id="f" onsubmit="return false">
+    <h2 id="ft">নতুন আয় যোগ করুন</h2>
+    <div class="grid">
+      <div class="full"><label for="d">তারিখ</label><input type="date" id="d" required></div>
+      <div><label for="g">প্রধান খাত</label><select id="g" required></select></div>
+      <div><label for="s">উপ খাত</label><select id="s" required></select></div>
+      <div id="flatBox" class="full" hidden><label for="fl">ফ্ল্যাট</label><select id="fl"></select></div>
+      <div class="full"><label for="a">টাকার পরিমাণ (৳)</label><input type="number" id="a" min="1" step="any" inputmode="decimal" required></div>
+      <div class="full"><label for="n">বিবরণ / ভাউচার নং (ঐচ্ছিক)</label><input id="n" autocomplete="off"></div>
+      <div class="full"><button class="btn" id="save" style="width:100%">আয় সংরক্ষণ করুন</button></div>
+    </div>
+  </form>
+</section>
+
+<!-- লেনদেন -->
+<section class="view" id="v-list">
+  <div class="card"><h2>হিসাবের বিস্তারিত বিবরণ</h2><div class="wrap"><table><thead><tr><th>তারিখ</th><th>ধরণ</th><th>খাত / বিবরণ</th><th class="n">পরিমাণ</th><th class="n">অ্যাকশন</th></tr></thead><tbody id="tb"></tbody></table></div></div>
+</section>
+</main>
+<div class="ov" id="dlg" hidden><div class="card box" role="dialog" aria-modal="true" aria-labelledby="dt"><h2 id="dt"></h2><p id="dm" style="margin:0 0 12px;color:var(--mute)"></p><div id="df"></div><div class="row" style="justify-content:flex-end"><button class="btn ghost" id="dno">বাতিল</button><button class="btn" id="dok">ঠিক আছে</button></div></div></div>
+<div id="toast" role="status"></div>
+
+<script>
+/* ===== কনফিগ: ফ্ল্যাটের তালিকা এখানে বদলান ===== */
+const bn=n=>n.toLocaleString('bn-BD',{useGrouping:false});
+const FLATS=[];for(let fl=2;fl<=14;fl++)for(const s of ['এ','বি','সি'])FLATS.push(bn(fl)+'-'+s);FLATS.push(bn(15)+'-সি');
+
+const CATS={
+income:{
+ 'মাসিক সার্ভিস চার্জ':['ফ্ল্যাটের সার্ভিস চার্জ'],
+ 'ব্যাংক সুদ ও মুনাফা':['সঞ্চয়ী হিসাবের সুদ','এফডিআর/ডিপিএস মুনাফা'],
+ 'বিশেষ ডোনেশন ও অনুদান':['সাধারণ অনুদান','নির্দিষ্ট কাজের জন্য অনুদান'],
+ 'অন্যান্য আয়':['বিলম্ব ফি/জরিমানা','হল/ছাদ ভাড়া','স্ক্র্যাপ/পুরানো মালামাল বিক্রি']},
+expense:{
+ 'বেতন ও সম্মানী':['কর্মচারীদের বেতন','মালির বেতন','বোনাস ও বকশিশ'],
+ 'ইউটিলিটি বিল':['বিদ্যুৎ বিল','ওয়াসা বিল','গ্যাস বিল','ইন্টারনেট ও ডিশ বিল','মোবাইল বিল'],
+ 'লিফট':['সার্ভিসিং ফি (মাসিক)','মালামাল ও যন্ত্রাংশ ক্রয়','মেরামত ও রক্ষণাবেক্ষণ','টেকনিশিয়ান ও শ্রমিক মজুরি'],
+ 'জেনারেটর':['সার্ভিসিং ফি (ষান্মাসিক)','জ্বালানি/তেল ক্রয়','মালামাল ও যন্ত্রাংশ ক্রয়','মেরামত, রক্ষণাবেক্ষণ ও মজুরি'],
+ 'ট্যাংক ও প্লাম্বিং':['পরিষ্কার ও জীবাণুমুক্তকরণ','মেরামত ও রক্ষণাবেক্ষণ','প্লাম্বিং ও ওয়াশরুম মেরামত','শ্রমিক মজুরি'],
+ 'মেইনটেন্যান্স ও মেরামত':['সিসি ক্যামেরা ও সিকিউরিটি সিস্টেম','ইলেকট্রিক ও লাইটিং মেরামত','বিল্ডিং, গেট ও সিভিল মেরামত'],
+ 'অফিস ও প্রশাসনিক':['খাতা, স্টেশনারি ও অফিস সামগ্রী','প্রিন্টিং, ফটোকপি ও লেমিনেটিং','আপ্যায়ন ও মিটিং খরচ','আইনি, ট্রেড লাইসেন্স ও প্রশাসনিক ফি'],
+ 'পরিচ্ছন্নতা ও পেস্ট কন্ট্রোল':['ময়লার বিল (মাসিক)','ক্লিনিং মালামাল ও কেমিক্যাল','পেস্ট কন্ট্রোল/পোকা-মাকড় দমন','বর্জ্য ব্যবস্থাপনা'],
+ 'অন্যান্য':['নির্মাণ সামগ্রী (ইট, বালু, সিমেন্ট)','হার্ডওয়্যার ও স্যানিটারি সামগ্রী','পরিবহন ও ভ্যান/গাড়ি ভাড়া','আপৎকালীন/জরুরি মেরামত','ডোনেশন/চাঁদা/কমিউনিটি ফি','ব্যাংক চার্জ/অন্যান্য সার্ভিস ফি']}};
+
+/* ===== ডাটা লেয়ার: পরে এই অবজেক্টটি API/ডাটাবেজ কলে বদলালেই হবে ===== */
+const DB={
+ _g(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},
+ async list(){return this._g('kmt_tx',[])},
+ async add(t){const l=await this.list();t.id=Date.now()+''+Math.random().toString(36).slice(2,6);l.push(t);localStorage.setItem('kmt_tx',JSON.stringify(l))},
+ async remove(id){localStorage.setItem('kmt_tx',JSON.stringify((await this.list()).filter(x=>x.id!==id)))},
+ async opening(){return this._g('kmt_open',0)},
+ async adminHash(){return this._g('kmt_adm','')},
+ async setAdminHash(h){localStorage.setItem('kmt_adm',JSON.stringify(h))},
+ async setOpening(v){localStorage.setItem('kmt_open',JSON.stringify(+v||0))}
+};
+
+const $=id=>document.getElementById(id),M=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+const tk=n=>'৳ '+(+n||0).toLocaleString('bn-BD',{maximumFractionDigits:2});
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const bnDate=s=>new Date(s+'T00:00').toLocaleDateString('bn-BD',{day:'numeric',month:'short'});
+let type='income',all=[],open0=0;
+
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1800)}
+
+/* ট্যাব */
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+b.dataset.v));
+ $('mbar').hidden=b.dataset.v==='add';
+});
+
+/* আয়/ব্যয় টগল */
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{type=b.dataset.t;
+ document.querySelectorAll('.seg button').forEach(x=>x.classList.toggle('on',x===b));setType()});
+function setType(){
+ document.body.classList.toggle('out',type==='expense');
+ const w=type==='income'?'আয়':'ব্যয়';$('ft').textContent='নতুন '+w+' যোগ করুন';$('save').textContent=w+' সংরক্ষণ করুন';
+ $('g').innerHTML='<option value="">খাত বাছাই করুন</option>'+Object.keys(CATS[type]).map(k=>`<option>${esc(k)}</option>`).join('');setSub();
+}
+function setSub(){
+ const g=$('g').value;
+ $('s').innerHTML=g?'<option value="">উপ খাত বাছাই করুন</option>'+CATS[type][g].map(k=>`<option>${esc(k)}</option>`).join(''):'<option value="">আগে খাত বাছাই করুন</option>';
+ $('s').disabled=!g;
+ $('flatBox').hidden=!(type==='income'&&g==='মাসিক সার্ভিস চার্জ');
+}
+$('g').onchange=setSub;
+$('fl').innerHTML=FLATS.map(f=>`<option>${f}</option>`).join('');
+
+$('save').onclick=async()=>{
+ const f=$('f');if(!f.reportValidity())return;
+ await DB.add({type,date:$('d').value,group:$('g').value,item:$('s').value,flat:$('flatBox').hidden?'':$('fl').value,amount:+$('a').value,note:$('n').value.trim()});
+ $('a').value='';$('n').value='';setType();setMonth($('d').value.slice(0,7));
+ document.querySelector('nav button[data-v=dash]').click();toast('সংরক্ষিত হয়েছে');render();
+};
+
+/* হিসাব */
+const mkey=d=>d.slice(0,7);
+function calc(){
+ const m=$('month').value,cur=all.filter(t=>mkey(t.date)===m),prev=all.filter(t=>mkey(t.date)<m);
+ const sum=(a,ty)=>a.filter(t=>t.type===ty).reduce((s,t)=>s+t.amount,0);
+ const pb=open0+sum(prev,'income')-sum(prev,'expense'),I=sum(cur,'income'),O=sum(cur,'expense');
+ return{m,cur,pb,I,O,cb:pb+I-O};
+}
+function breakdown(cur,ty,total){
+ const g={};cur.filter(t=>t.type===ty).forEach(t=>{(g[t.group]??={sum:0,items:{}}).sum+=t.amount;g[t.group].items[t.item]=(g[t.group].items[t.item]||0)+t.amount});
+ const col=ty==='income'?'var(--in)':'var(--out)',k=Object.keys(g);
+ if(!k.length)return '<div class="empty">এই মাসে কোনো এন্ট্রি নেই</div>';
+ return k.sort((a,b)=>g[b].sum-g[a].sum).map(n=>`<details><summary><span>${esc(n)}</span><span>${tk(g[n].sum)}</span></summary>
+ <div class="bar"><i style="width:${total?g[n].sum/total*100:0}%;background:${col}"></i></div>
+ ${Object.entries(g[n].items).map(([i,v])=>`<div class="sub"><span>${esc(i)}</span><span>${tk(v)}</span></div>`).join('')}</details>`).join('')
+ +`<div class="sub" style="padding:10px 0 0;font-weight:600;color:var(--ink)"><span>মোট</span><span>${tk(total)}</span></div>`;
+}
+async function render(){
+ all=await DB.list();open0=await DB.opening();$('open').value=open0||'';$('openSet').hidden=all.length>0;$('openView').hidden=all.length===0;$('openVal').textContent=tk(open0);
+ const c=calc();
+ $('eq').innerHTML=`<div><em class="ic" style="--tb:#f1f5f9;--tc:#475569"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3M3 4v5h5M12 7v5l3 2"/></svg></em><span>পূর্বের জের</span><b>${tk(c.pb)}</b></div><div class="i"><em class="ic" style="--tb:var(--in-bg);--tc:var(--in)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg></em><span>মোট আয়</span><b>${tk(c.I)}</b></div><div class="o"><em class="ic" style="--tb:var(--out-bg);--tc:var(--out)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V8m0 0l-5 5m5-5l5 5M5 4h14"/></svg></em><span>মোট ব্যয়</span><b>${tk(c.O)}</b></div><div><em class="ic" style="--tb:#e0f2fe;--tc:#0369a1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 012-2h13v4M3 7v10a2 2 0 002 2h14a1 1 0 001-1v-9H5a2 2 0 01-2-2zM16 14h2"/></svg></em><span>বর্তমান জের</span><b>${tk(c.cb)}</b></div>`;
+ $('bd-in').innerHTML=breakdown(c.cur,'income',c.I);$('bd-out').innerHTML=breakdown(c.cur,'expense',c.O);
+ const rows=[...c.cur].sort((a,b)=>b.date.localeCompare(a.date));
+ $('tb').innerHTML=rows.length?rows.map(t=>`<tr><td>${bnDate(t.date)}</td><td><span class="badge ${t.type==='income'?'i':'o'}">${t.type==='income'?'আয়':'ব্যয়'}</span></td><td>${esc(t.group)}<br><small style="color:var(--mute)">${esc(t.item)}${t.flat?' · ফ্ল্যাট '+esc(t.flat):''}${t.note?' · '+esc(t.note):''}</small></td><td class="n ${t.type==='income'?'in-c':'out-c'}">${tk(t.amount)}</td><td class="n"><button class="x" aria-label="মুছুন" onclick="del('${t.id}')">✕</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">এই মাসে কোনো লেনদেন নেই। "আয়/ব্যয় এন্ট্রি" থেকে যোগ করুন।</td></tr>';
+}
+/* মডাল (confirm/prompt কিছু পরিবেশে ব্লক থাকে, তাই নিজস্ব ডায়ালগ) */
+function ask({title,msg='',fields=[],ok='ঠিক আছে'}){return new Promise(res=>{
+ $('dt').textContent=title;$('dm').textContent=msg;$('dm').hidden=!msg;
+ $('df').innerHTML=fields.map((f,i)=>`<input id="df${i}" type="${f.type||'text'}" placeholder="${esc(f.ph)}" ${f.type==='number'?'step="any" min="0" inputmode="decimal"':''} autocomplete="off" style="margin-bottom:10px">`).join('');
+ $('dok').textContent=ok;$('dlg').hidden=false;
+ const done=v=>{$('dlg').hidden=true;$('dok').onclick=$('dno').onclick=document.onkeydown=null;res(v)};
+ $('dok').onclick=()=>done(fields.map((_,i)=>$('df'+i).value));
+ $('dno').onclick=()=>done(null);
+ document.onkeydown=e=>{if(e.key==='Escape')done(null);else if(e.key==='Enter'&&e.target.tagName!=='BUTTON')$('dok').click()};
+ (fields.length?$('df0'):$('dok')).focus();
+})}
+async function del(id){
+ const v=await ask({title:'এন্ট্রি মুছবেন?',msg:'এই লেনদেনটি স্থায়ীভাবে মুছে যাবে।',ok:'মুছুন'});
+ if(v){await DB.remove(id);toast('মুছে ফেলা হয়েছে');render()}
+}
+/* অ্যাডমিন পাসওয়ার্ড (শুধু ব্রাউজারে সংরক্ষিত হ্যাশ; এটি আসল নিরাপত্তা নয়, ভুল করে বদলানো ঠেকায়) */
+async function hash(p){const d=new TextEncoder().encode('kmt|'+p);
+ if(window.crypto&&crypto.subtle){const b=await crypto.subtle.digest('SHA-256',d);return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+ let h=5381;for(const c of d)h=((h<<5)+h+c)>>>0;return 'x'+h}
+async function editOpen(){
+ const h=await DB.adminHash();
+ if(!h){
+  const v=await ask({title:'অ্যাডমিন পাসওয়ার্ড সেট করুন',msg:'প্রথমবার একটি পাসওয়ার্ড ঠিক করুন এবং মনে রাখুন।',fields:[{ph:'নতুন পাসওয়ার্ড',type:'password'},{ph:'আবার লিখুন',type:'password'}],ok:'সেট করুন'});
+  if(!v)return;
+  if(v[0].length<4||v[0]!==v[1])return toast('পাসওয়ার্ড কমপক্ষে ৪ অক্ষর ও দুইবার একই হতে হবে');
+  await DB.setAdminHash(await hash(v[0]));
+ }else{
+  const v=await ask({title:'অ্যাডমিন পাসওয়ার্ড',fields:[{ph:'পাসওয়ার্ড',type:'password'}],ok:'যাচাই করুন'});
+  if(!v)return;
+  if(await hash(v[0])!==h)return toast('পাসওয়ার্ড ভুল');
+ }
+ const n=await ask({title:'প্রারম্ভিক জের সম্পাদনা',msg:'বর্তমান জের: '+tk(open0),fields:[{ph:'নতুন পরিমাণ (৳)',type:'number'}],ok:'সংরক্ষণ'});
+ if(!n||n[0]==='')return;
+ await DB.setOpening(n[0]);toast('জের হালনাগাদ হয়েছে');render();
+}
+async function saveOpen(){await DB.setOpening($('open').value);toast('প্রারম্ভিক জের সংরক্ষিত');render()}
+
+/* CSV রিপোর্ট (বাংলা ঠিক রাখতে BOM সহ) */
+function csv(){
+ const c=calc(),[y,mm]=c.m.split('-'),q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+ const L=[[`কাজী মোশাররফ টাওয়ার ভবন মালিক সমিতি - ${M[+mm-1]} ${y}`],['পূর্বের জের',c.pb],['মোট আয়',c.I],['মোট ব্যয়',c.O],['বর্তমান জের',c.cb],[],['তারিখ','ধরন','খাত','উপখাত','ফ্ল্যাট','বিবরণ','টাকা']];
+ [...c.cur].sort((a,b)=>a.date.localeCompare(b.date)).forEach(t=>L.push([t.date,t.type==='income'?'আয়':'ব্যয়',t.group,t.item,t.flat,t.note,t.amount]));
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+L.map(r=>r.map(q).join(',')).join('\n')],{type:'text/csv;charset=utf-8'}));
+ a.download=`hisab-${c.m}.csv`;a.click();
+}
+
+/* শুরু */
+const now=new Date(),z=n=>String(n).padStart(2,'0');
+const Y=now.getFullYear();
+function setMonth(v){$('month').value=v}
+$('month').onchange=render;
+setMonth(`${Y}-${z(now.getMonth()+1)}`);
+$('d').value=`${now.getFullYear()}-${z(now.getMonth()+1)}-${z(now.getDate())}`;
+setType();render();
+</script>
+</body>
+</html>
