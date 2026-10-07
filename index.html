@@ -36,6 +36,7 @@ label{display:block;font-size:.88rem;color:var(--mute);margin-bottom:4px}
 .eq span{padding-right:40px}.ic{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--tb,#f1f5f9);color:var(--tc,#475569)}
 .eq .i{border-top-color:var(--in)}.eq .o{border-top-color:var(--out)}
 .eq span{display:block;font-size:.85rem;color:var(--mute)}.eq b{font-size:1.3rem;font-weight:700}
+.eq .c{background:#f0f9ff;border-top-color:#38bdf8}.eq .c b{color:#0369a1}
 .eq .i b{color:var(--in)}.eq .o b{color:var(--out)}
 .mbar input{max-width:220px}
 .cols{display:grid;gap:16px;grid-template-columns:1fr 1fr}
@@ -59,6 +60,7 @@ nav button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .dwrap{position:relative}.dwrap #d{padding-right:46px}.cal{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;color:var(--mute);padding:6px;display:grid}#dpick{position:absolute;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;padding:0;border:0}
 .ibtn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 8px;font-size:.8rem;cursor:pointer;color:var(--ink);white-space:nowrap}.ibtn:hover{background:#f1f5f9}
 .invbox{background:#fff;border-radius:16px;padding:16px;max-width:100%;max-height:94vh;overflow:auto}
+.ibar{position:sticky;top:0;z-index:2;background:#fff;padding-bottom:12px;justify-content:flex-end}#invBody .a4+.a4{margin-top:20px;border-top:2px dashed #cbd5e1}
 #invFit{overflow:hidden;border:1px solid var(--line)}#invBody{transform-origin:top left}
 #cap{position:fixed;left:-10000px;top:0}
 .a4{width:794px;min-height:1123px;padding:48px;background:#fff;color:#0f172a;display:flex;flex-direction:column;box-sizing:border-box;font-size:15px;line-height:1.5}
@@ -126,7 +128,7 @@ nav button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 </section>
 </main>
 <div class="ov" id="dlg" hidden><div class="card box" role="dialog" aria-modal="true" aria-labelledby="dt"><h2 id="dt"></h2><p id="dm" style="margin:0 0 12px;color:var(--mute)"></p><div id="df"></div><div class="row" style="justify-content:flex-end"><button class="btn ghost" id="dno">বাতিল</button><button class="btn" id="dok">ঠিক আছে</button></div></div></div>
-<div class="ov" id="invOv" hidden><div class="invbox"><div id="invFit"><div id="invBody"></div></div><div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn ghost" id="invX">বন্ধ করুন</button><button class="btn" id="invD" style="--acc:var(--ink)">ডাউনলোড করুন</button></div></div></div>
+<div class="ov" id="invOv" hidden><div class="invbox"><div class="row ibar"><button class="btn ghost" id="invX">বন্ধ করুন</button><button class="btn" id="invD" style="--acc:var(--ink)">ডাউনলোড করুন</button></div><div id="invFit"><div id="invBody"></div></div></div></div>
 <div id="cap" aria-hidden="true"></div>
 <div id="toast" role="status"></div>
 
@@ -249,7 +251,7 @@ function invHTML(t){const inc=t.type==='income',[y,m,d]=t.date.split('-');
  <div class="seal">${stamp(inc?'RECEIVED':'PAID',inc?'#059669':'#dc2626')}</div>
  <div class="ft">এটি কম্পিউটার সিস্টেম দ্বারা প্রস্তুতকৃত, স্বাক্ষরের প্রয়োজন নেই।</div></div>`}
 function rptPages(){const c=calc(),[y,mo]=c.m.split('-');
- const rows=[{k:'+ পূর্বের জের',a:tk(c.pb)}];
+ const rows=[{k:'পূর্বের জের',a:(c.pb<0?'− '+tk(-c.pb):'+ '+tk(c.pb))}];
  [...c.cur].sort((a,b)=>a.date.localeCompare(b.date)).forEach(t=>rows.push({t}));
  rows.push({k:'মোট আয়',a:'+ '+tk(c.I)},{k:'মোট ব্যয়',a:'− '+tk(c.O)},{k:'বর্তমান জের',a:tk(c.cb),b:1});
  const N=16,pg=[];for(let i=0;i<rows.length;i+=N)pg.push(rows.slice(i,i+N));
@@ -272,16 +274,17 @@ async function pdfOut(pages,name){
   doc.save(name);toast('ডাউনলোড হয়েছে')
  }catch(e){toast('PDF তৈরি করা যায়নি')}
  host.innerHTML=''}
-let curInv=null;
-function fitInv(){const b=$('invBody'),a=b.firstElementChild;if(!a)return;const sc=Math.min(1,(innerWidth-64)/794);
- b.style.width='794px';b.style.transform=`scale(${sc})`;$('invFit').style.width=794*sc+'px';$('invFit').style.height=a.offsetHeight*sc+'px'}
-function showInv(id){const t=all.find(x=>x.id===id);if(!t)return;curInv=t;$('invBody').innerHTML=invHTML(t);$('invOv').hidden=false;fitInv()}
+let curDL=null;
+function openPrev(pages,name){curDL={pages,name};$('invBody').innerHTML=pages.join('');$('invOv').hidden=false;fitInv();document.querySelector('.invbox').scrollTop=0}
+function fitInv(){const b=$('invBody');if(!b.firstElementChild)return;const sc=Math.min(1,(innerWidth-64)/794);
+ b.style.width='794px';b.style.transform=`scale(${sc})`;$('invFit').style.width=794*sc+'px';$('invFit').style.height=b.offsetHeight*sc+'px'}
+function showInv(id){const t=all.find(x=>x.id===id);if(!t)return;openPrev([invHTML(t)],(t.type==='income'?'receipt-':'voucher-')+t.no.replace(/[^0-9-]/g,'').replace(/^-/,'')+'.pdf')}
 window.addEventListener('resize',()=>{if(!$('invOv').hidden)fitInv()});
 $('tb').addEventListener('click',e=>{const b=e.target.closest('.ib');if(!b)return;b.classList.contains('del')?del(b.dataset.id):showInv(b.dataset.id)});
 $('invX').onclick=()=>$('invOv').hidden=true;
 $('invOv').addEventListener('click',e=>{if(e.target.id==='invOv')$('invOv').hidden=true});
-$('invD').onclick=()=>curInv&&pdfOut([invHTML(curInv)],(curInv.type==='income'?'receipt-':'voucher-')+curInv.no.replace(/[^0-9-]/g,'').replace(/^-/,'')+'.pdf');
-$('dlBtn').onclick=()=>pdfOut(rptPages(),'report-'+$('month').value+'.pdf');
+$('invD').onclick=()=>curDL&&pdfOut(curDL.pages,curDL.name);
+$('dlBtn').onclick=()=>openPrev(rptPages(),'report-'+$('month').value+'.pdf');
 const mkey=d=>d.slice(0,7);
 function calc(){
  const m=$('month').value,cur=all.filter(t=>mkey(t.date)===m),prev=all.filter(t=>mkey(t.date)<m);
@@ -302,7 +305,8 @@ async function render(){
  all=await DB.list();open0=await DB.opening();
  if(all.some(t=>!t.no||!t.id)){all.forEach((t,i)=>{if(!t.id)t.id='L'+Date.now()+i});all.filter(t=>!t.no).sort((a,b)=>(a.date+a.id).localeCompare(b.date+b.id)).forEach(t=>t.no=nextNo(all,t));await DB.saveAll(all)}$('open').value=open0||'';$('openSet').hidden=all.length>0;$('openView').hidden=all.length===0;$('openVal').textContent=tk(open0);
  const c=calc();
- $('eq').innerHTML=`<div><em class="ic" style="--tb:#f1f5f9;--tc:#475569"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3M3 4v5h5M12 7v5l3 2"/></svg></em><span>পূর্বের জের</span><b>${tk(c.pb)}</b></div><div class="i"><em class="ic" style="--tb:var(--in-bg);--tc:var(--in)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg></em><span>মোট আয়</span><b>${tk(c.I)}</b></div><div class="o"><em class="ic" style="--tb:var(--out-bg);--tc:var(--out)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V8m0 0l-5 5m5-5l5 5M5 4h14"/></svg></em><span>মোট ব্যয়</span><b>${tk(c.O)}</b></div><div><em class="ic" style="--tb:#e0f2fe;--tc:#0369a1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 012-2h13v4M3 7v10a2 2 0 002 2h14a1 1 0 001-1v-9H5a2 2 0 01-2-2zM16 14h2"/></svg></em><span>বর্তমান জের</span><b>${tk(c.cb)}</b></div>`;
+ const [cy,cm]=c.m.split('-').map(Number),pm=(cm+10)%12,py=cm===1?cy-1:cy;
+ $('eq').innerHTML=`<div><em class="ic" style="--tb:#f1f5f9;--tc:#475569"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3M3 4v5h5M12 7v5l3 2"/></svg></em><span>পূর্বের জের (${M[pm]} ${bd(py)})</span><b>${tk(c.pb)}</b></div><div class="i"><em class="ic" style="--tb:var(--in-bg);--tc:var(--in)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg></em><span>মোট আয়</span><b>${tk(c.I)}</b></div><div class="o"><em class="ic" style="--tb:var(--out-bg);--tc:var(--out)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V8m0 0l-5 5m5-5l5 5M5 4h14"/></svg></em><span>মোট ব্যয়</span><b>${tk(c.O)}</b></div><div class="c"><em class="ic" style="--tb:#e0f2fe;--tc:#0369a1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 012-2h13v4M3 7v10a2 2 0 002 2h14a1 1 0 001-1v-9H5a2 2 0 01-2-2zM16 14h2"/></svg></em><span>বর্তমান জের</span><b>${tk(c.cb)}</b></div>`;
  $('bd-in').innerHTML=breakdown(c.cur,'income',c.I);$('bd-out').innerHTML=breakdown(c.cur,'expense',c.O);
  const rows=[...c.cur].sort((a,b)=>b.date.localeCompare(a.date));
  $('tb').innerHTML=rows.length?rows.map(t=>`<tr><td>${bnDate(t.date)}</td><td><span class="badge ${t.type==='income'?'i':'o'}">${t.type==='income'?'আয়':'ব্যয়'}</span></td><td>${esc(t.group)}<br><small style="color:var(--mute)">${esc(t.item)}${t.flat?' · ফ্ল্যাট '+esc(t.flat):''}${t.note?' · '+esc(t.note):''}</small></td><td class="n ${t.type==='income'?'in-c':'out-c'}">${tk(t.amount)}</td><td class="act"><button class="ib inv" data-id="${t.id}" title="ইনভয়েস ${esc(bd(t.no||''))}" aria-label="ইনভয়েস"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg></button><button class="ib del" data-id="${t.id}" title="মুছুন" aria-label="মুছুন"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">এই মাসে কোনো লেনদেন নেই। "আয়/ব্যয় এন্ট্রি" থেকে যোগ করুন।</td></tr>';
