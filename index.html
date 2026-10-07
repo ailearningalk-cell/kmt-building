@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#14304a">
-<title>কাজী মোশাররফ টাওয়ার - হিসাব</title>
+<title>কাজী মোশাররফ টাওয়ার ভবন মালিক সমিতি - অ্যাকাউন্টিং ম্যানেজমেন্ট সিস্টেম</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--mute:#64748b;--line:#e2e8f0;--in:#059669;--in-bg:#ecfdf5;--out:#dc2626;--out-bg:#fef2f2;--acc:var(--in);--sh:0 4px 6px -1px #0000000d,0 2px 4px -2px #0000000d}
 body.out{--acc:var(--out)}
 *{box-sizing:border-box}
+html{overflow-x:hidden}main,.card,.wrap{min-width:0;max-width:100%}
 body{margin:0;font-family:'Noto Sans Bengali',system-ui,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:24px;font-size:16px;line-height:1.5}
 header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:20px 16px;text-align:center;width:min(948px,calc(100% - 32px));margin:16px auto 0;border-radius:16px;box-shadow:0 10px 15px -3px #00000014}
 header h1{margin:0;font-size:1.1rem;font-weight:600}header small{opacity:.7;display:block;font-weight:400}
@@ -53,9 +54,23 @@ th{color:var(--mute);font-weight:500}td.n,th.n{text-align:right;white-space:nowr
 nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:980px;margin:14px auto 0;padding:0 16px}
 nav button{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px 8px;font-weight:600;color:var(--mute);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:var(--sh);transition:background .2s}nav button:hover{background:#f1f5f9}nav button.on:hover{background:var(--ink)}nav svg{flex:none}
 nav button.on{background:var(--ink);border-color:var(--ink);color:#fff}
-.mbar{padding:12px 16px}.badge{font-size:.8rem;padding:2px 8px;border-radius:99px;font-weight:600}.badge.i{background:var(--in-bg);color:var(--in)}.badge.o{background:var(--out-bg);color:var(--out)}
+.mbar{padding:12px 16px}.mbar .row{justify-content:space-between}#v-list h2{text-align:center}.badge{font-size:.8rem;padding:2px 8px;border-radius:99px;font-weight:600}.badge.i{background:var(--in-bg);color:var(--in)}.badge.o{background:var(--out-bg);color:var(--out)}
 .ov{position:fixed;inset:0;background:#0007;display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}.ov[hidden]{display:none}.box{max-width:380px;width:100%;margin:0}
 .dwrap{position:relative}.dwrap #d{padding-right:46px}.cal{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;cursor:pointer;color:var(--mute);padding:6px;display:grid}#dpick{position:absolute;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;padding:0;border:0}
+.ibtn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 8px;font-size:.8rem;cursor:pointer;color:var(--ink);white-space:nowrap}.ibtn:hover{background:#f1f5f9}
+.invbox{background:#fff;border-radius:16px;padding:16px;max-width:100%;max-height:94vh;overflow:auto}
+#invFit{overflow:hidden;border:1px solid var(--line)}#invBody{transform-origin:top left}
+#cap{position:fixed;left:-10000px;top:0}
+.a4{width:794px;min-height:1123px;padding:48px;background:#fff;color:#0f172a;display:flex;flex-direction:column;box-sizing:border-box;font-size:15px;line-height:1.5}
+.ah{text-align:center;border-bottom:2px solid #0f172a;padding-bottom:12px}.ah b{display:block;font-size:22px;white-space:nowrap}.ah span{display:block;font-size:14.4px;color:#64748b;white-space:nowrap;margin-top:2px}
+.it{text-align:center;margin:18px auto 10px;padding:4px 22px;border-radius:99px;font-weight:700;font-size:18px}.it.i{background:#ecfdf5;color:#059669}.it.o{background:#fef2f2;color:#dc2626}
+.im{display:flex;justify-content:space-between;margin-bottom:6px}.mt{text-align:center;font-weight:700;font-size:18px;margin-top:14px}
+.sh{font-size:17px;margin:18px 0 8px;text-align:center}
+.at{width:100%;border-collapse:collapse;font-size:15px}.at th{background:#eef2f7;color:#475569;font-weight:600;padding:8px 10px;border:1px solid #e2e8f0;text-align:center}.at td{padding:9px 10px;border:1px solid #e2e8f0;vertical-align:top}.at small{color:#64748b;font-size:13px}.at .n{text-align:right;white-space:nowrap}.at th.n{text-align:center}.at td.c{text-align:center}.at .tot td{font-weight:800;font-size:16px}.at .sm td{font-weight:700;background:#f8fafc}
+.wd{border:1px solid #0f172a;padding:10px 12px;margin-top:14px}
+.seal{align-self:flex-end;margin:18px 40px 0 0;line-height:0;transform:rotate(-6deg)}
+.ft{margin-top:auto;text-align:center;font-size:13px;color:#64748b;padding-top:24px}
+.act{text-align:center;white-space:nowrap}.ib{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#fff;display:inline-grid;place-items:center;cursor:pointer;margin:0 3px}.ib.inv{color:#0369a1;background:#e0f2fe;border-color:#bae6fd}.ib.del{color:var(--out);background:var(--out-bg);border-color:#fecaca}.ib:hover{filter:brightness(.95)}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 #toast{z-index:60;position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
 #toast.on{opacity:1}
@@ -66,11 +81,11 @@ nav button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 </head>
 <body>
 <header>
-  <h1>কাজী মোশাররফ টাওয়ার <small>ভবন মালিক সমিতি · আয় ও ব্যয়ের হিসাব</small></h1>
+  <h1>কাজী মোশাররফ টাওয়ার ভবন মালিক সমিতি <small>অ্যাকাউন্টিং ম্যানেজমেন্ট সিস্টেম</small></h1>
 </header>
 <nav><button class="on" data-v="dash"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>ড্যাশবোর্ড</button><button data-v="add"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m8-8H4"/></svg>আয়/ব্যয় এন্ট্রি</button><button data-v="list"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 12h6M9 16h6"/></svg>লেনদেন</button></nav>
 <main>
-<div class="card mbar" id="mbar"><label for="month">মাস নির্বাচন</label><input type="month" id="month"></div>
+<div class="card mbar" id="mbar"><label for="month">মাস নির্বাচন</label><div class="row"><input type="month" id="month"><button class="btn" id="dlBtn" hidden style="--acc:var(--ink)">ডাউনলোড করুন</button></div></div>
 <!-- ড্যাশবোর্ড -->
 <section class="view on" id="v-dash">
   <div class="eq" id="eq"></div>
@@ -107,12 +122,16 @@ nav button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 
 <!-- লেনদেন -->
 <section class="view" id="v-list">
-  <div class="card"><h2>হিসাবের বিস্তারিত বিবরণ</h2><div class="wrap"><table><thead><tr><th>তারিখ</th><th>ধরণ</th><th>খাত / বিবরণ</th><th class="n">পরিমাণ</th><th class="n">অ্যাকশন</th></tr></thead><tbody id="tb"></tbody></table></div></div>
+  <div class="card"><h2>হিসাবের বিস্তারিত বিবরণ</h2><div class="wrap"><table><thead><tr><th>তারিখ</th><th>ধরণ</th><th>খাত / বিবরণ</th><th class="n">পরিমাণ</th><th class="n" style="text-align:center">অ্যাকশন</th></tr></thead><tbody id="tb"></tbody></table></div></div>
 </section>
 </main>
 <div class="ov" id="dlg" hidden><div class="card box" role="dialog" aria-modal="true" aria-labelledby="dt"><h2 id="dt"></h2><p id="dm" style="margin:0 0 12px;color:var(--mute)"></p><div id="df"></div><div class="row" style="justify-content:flex-end"><button class="btn ghost" id="dno">বাতিল</button><button class="btn" id="dok">ঠিক আছে</button></div></div></div>
+<div class="ov" id="invOv" hidden><div class="invbox"><div id="invFit"><div id="invBody"></div></div><div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn ghost" id="invX">বন্ধ করুন</button><button class="btn" id="invD" style="--acc:var(--ink)">ডাউনলোড করুন</button></div></div></div>
+<div id="cap" aria-hidden="true"></div>
 <div id="toast" role="status"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <script>
 /* ===== কনফিগ: ফ্ল্যাটের তালিকা এখানে বদলান ===== */
 const bn=n=>n.toLocaleString('bn-BD',{useGrouping:false});
@@ -139,8 +158,9 @@ expense:{
 const DB={
  _g(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},
  async list(){return this._g('kmt_tx',[])},
- async add(t){const l=await this.list();t.id=Date.now()+''+Math.random().toString(36).slice(2,6);l.push(t);localStorage.setItem('kmt_tx',JSON.stringify(l))},
- async remove(id){localStorage.setItem('kmt_tx',JSON.stringify((await this.list()).filter(x=>x.id!==id)))},
+ async add(t){const l=await this.list();t.id=Date.now()+''+Math.random().toString(36).slice(2,6);t.no=nextNo(l,t);l.push(t);localStorage.setItem('kmt_tx',JSON.stringify(l))},
+ async remove(id){const l=await this.list(),n=l.filter(x=>String(x.id)!==String(id));localStorage.setItem('kmt_tx',JSON.stringify(n));return l.length-n.length},
+ async saveAll(l){localStorage.setItem('kmt_tx',JSON.stringify(l))},
  async opening(){return this._g('kmt_open',0)},
  async adminHash(){return this._g('kmt_adm','')},
  async setAdminHash(h){localStorage.setItem('kmt_adm',JSON.stringify(h))},
@@ -160,7 +180,7 @@ function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');setTi
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
  document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+b.dataset.v));
- $('mbar').hidden=b.dataset.v==='add';
+ window.scrollTo(0,0);$('mbar').hidden=b.dataset.v==='add';$('dlBtn').hidden=b.dataset.v!=='list';
 });
 
 /* আয়/ব্যয় টগল */
@@ -198,6 +218,70 @@ $('d').addEventListener('input',()=>{
  $('d').value=t.length>4?t.slice(0,2)+'/'+t.slice(2,4)+'/'+t.slice(4):t.length>2?t.slice(0,2)+'/'+t.slice(2):t;$('d').setCustomValidity('')});
 $('dpick').onchange=()=>{if($('dpick').value)setDateISO($('dpick').value)};
 $('calBtn').onclick=()=>{$('dpick').value=getISO();try{$('dpick').showPicker()}catch(e){$('dpick').focus();$('dpick').click()}};
+/* ইনভয়েস: আয় = টাকা প্রাপ্তি রসিদ, ব্যয় = পেমেন্ট ভাউচার */
+function nextNo(l,t){const p=(t.type==='income'?'আয়':'ব্যয়')+'-'+t.date.slice(0,4)+'-';
+ const mx=l.reduce((m,x)=>x.no&&x.no.startsWith(p)?Math.max(m,+x.no.slice(p.length)):m,0);return p+String(mx+1).padStart(4,'0')}
+const ORG1='কাজী মোশাররফ টাওয়ার ভবন মালিক সমিতি',ORG2='বাসা নং ৩/৪, ব্লক-এ, আসাদ এভিনিউ, ঢাকা-১২০৭';
+const W='শূন্য এক দুই তিন চার পাঁচ ছয় সাত আট নয় দশ এগার বার তের চৌদ্দ পনের ষোল সতের আঠার উনিশ বিশ একুশ বাইশ তেইশ চব্বিশ পঁচিশ ছাব্বিশ সাতাশ আটাশ ঊনত্রিশ ত্রিশ একত্রিশ বত্রিশ তেত্রিশ চৌত্রিশ পঁয়ত্রিশ ছত্রিশ সাঁইত্রিশ আটত্রিশ ঊনচল্লিশ চল্লিশ একচল্লিশ বিয়াল্লিশ তেতাল্লিশ চুয়াল্লিশ পঁয়তাল্লিশ ছেচল্লিশ সাতচল্লিশ আটচল্লিশ ঊনপঞ্চাশ পঞ্চাশ একান্ন বাহান্ন তিপ্পান্ন চুয়ান্ন পঞ্চান্ন ছাপ্পান্ন সাতান্ন আটান্ন ঊনষাট ষাট একষট্টি বাষট্টি তেষট্টি চৌষট্টি পঁয়ষট্টি ছিষট্টি সাতষট্টি আটষট্টি ঊনসত্তর সত্তর একাত্তর বাহাত্তর তিয়াত্তর চুয়াত্তর পঁচাত্তর ছিয়াত্তর সাতাত্তর আটাত্তর ঊনআশি আশি একাশি বিরাশি তিরাশি চুরাশি পঁচাশি ছিয়াশি সাতাশি অষ্টাশি ঊননব্বই নব্বই একানব্বই বিরানব্বই তিরানব্বই চুরানব্বই পঁচানব্বই ছিয়ানব্বই সাতানব্বই আটানব্বই নিরানব্বই'.split(' ');
+function wd(n){if(n===0)return W[0];const o=[],c=Math.floor(n/1e7);n%=1e7;const l=Math.floor(n/1e5);n%=1e5;const h=Math.floor(n/1e3);n%=1e3;const s=Math.floor(n/100);n%=100;
+ if(c)o.push(wd(c)+' কোটি');if(l)o.push(W[l]+' লক্ষ');if(h)o.push(W[h]+' হাজার');if(s)o.push(W[s]+' শত');if(n)o.push(W[n]);return o.join(' ')}
+function inWords(a){const t=Math.floor(a),p=Math.round((a-t)*100);return wd(t)+' টাকা'+(p?' '+W[p]+' পয়সা':'')+' মাত্র।'}
+const head=()=>`<div class="ah"><b>${ORG1}</b><span>${ORG2}</span></div>`;
+function stamp(word,col){const P=[];for(let i=0;i<64;i++){const a=i*Math.PI/32,q=i%2?88:96;P.push((100+q*Math.cos(a)).toFixed(1)+' '+(100+q*Math.sin(a)).toFixed(1))}
+ const big=word==='PAID',tx='font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="12" letter-spacing="1.5"';
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="175" height="175"><defs><path id="ta" d="M36 100A64 64 0 0 1 164 100"/><path id="tb" d="M27 100A73 73 0 0 0 173 100"/></defs>
+ <g fill="${col}" stroke="${col}"><path fill-rule="evenodd" stroke-width="2" stroke-linejoin="round" d="M${P.join('L')}ZM180 100A80 80 0 1 0 20 100A80 80 0 1 0 180 100Z"/>
+ <circle cx="100" cy="100" r="76" fill="none" stroke-width="2.5"/>
+ <path d="M52.9 78A52 52 0 0 1 147.1 78M147.1 122A52 52 0 0 1 52.9 122" fill="none" stroke-width="2.5"/>
+ <g stroke="none"><text ${tx}><textPath href="#ta" startOffset="50%" text-anchor="middle">THANK YOU</textPath></text>
+ <text ${tx}><textPath href="#tb" startOffset="50%" text-anchor="middle">THANK YOU</textPath></text>
+ <circle cx="30" cy="88" r="2"/><circle cx="29" cy="112" r="2"/><circle cx="170" cy="88" r="2"/><circle cx="171" cy="112" r="2"/>
+ <text x="100" y="${big?116:108}" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="${big?44:21}" textLength="${big?96:100}" lengthAdjust="spacingAndGlyphs" transform="rotate(-12 100 100)">${word}</text></g></g></svg>`}
+function invHTML(t){const inc=t.type==='income',[y,m,d]=t.date.split('-');
+ const sub=[t.item,t.flat?'ফ্ল্যাট '+t.flat:'',t.note].filter(Boolean).map(esc).join(' · ');
+ return `<div class="a4">${head()}<div class="it ${inc?'i':'o'}">${inc?'প্রাপ্তি রসিদ':'পেমেন্ট ভাউচার'}</div>
+ <div class="im"><span>নং: <b>${esc(bd(t.no))}</b></span><span>তারিখ: <b>${bd(d+'/'+m+'/'+y)}</b></span></div>
+ <h3 class="sh">লেনদেনের বিবরণ</h3>
+ <table class="at"><thead><tr><th style="width:70px">ক্রঃ নং</th><th>বিবরণ</th><th class="n" style="width:170px">টাকার পরিমাণ</th></tr></thead>
+ <tbody><tr><td class="c">১</td><td><b>${esc(t.group)}</b><br><small>${sub}</small></td><td class="n">${tk(t.amount)}</td></tr>
+ <tr class="tot"><td colspan="2">সর্বমোট টাকা</td><td class="n">${tk(t.amount)}</td></tr></tbody></table>
+ <div class="wd"><b>কথায়:</b> ${inWords(t.amount)}</div>
+ <div class="seal">${stamp(inc?'RECEIVED':'PAID',inc?'#059669':'#dc2626')}</div>
+ <div class="ft">এটি কম্পিউটার সিস্টেম দ্বারা প্রস্তুতকৃত, স্বাক্ষরের প্রয়োজন নেই।</div></div>`}
+function rptPages(){const c=calc(),[y,mo]=c.m.split('-');
+ const rows=[{k:'+ পূর্বের জের',a:tk(c.pb)}];
+ [...c.cur].sort((a,b)=>a.date.localeCompare(b.date)).forEach(t=>rows.push({t}));
+ rows.push({k:'মোট আয়',a:'+ '+tk(c.I)},{k:'মোট ব্যয়',a:'− '+tk(c.O)},{k:'বর্তমান জের',a:tk(c.cb),b:1});
+ const N=16,pg=[];for(let i=0;i<rows.length;i+=N)pg.push(rows.slice(i,i+N));
+ return pg.map((p,i)=>`<div class="a4">${head()}<div class="mt">${M[+mo-1]} ${bd(y)}</div><h3 class="sh">হিসাবের বিস্তারিত বিবরণ</h3>
+ <table class="at"><thead><tr><th style="width:120px">তারিখ</th><th style="width:60px">ধরণ</th><th>খাত / বিবরণ</th><th class="n" style="width:150px">পরিমাণ</th></tr></thead><tbody>${p.map(r=>{
+  if(!r.t)return `<tr class="${r.b?'tot':'sm'}"><td colspan="3">${r.k}</td><td class="n">${r.a}</td></tr>`;
+  const t=r.t,inc=t.type==='income',sub=[t.item,t.flat?'ফ্ল্যাট '+t.flat:'',t.note].filter(Boolean).map(esc).join(' · ');
+  return `<tr><td>${bnDate(t.date)}</td><td>${inc?'আয়':'ব্যয়'}</td><td><b>${esc(t.group)}</b><br><small>${sub}</small></td><td class="n ${inc?'in-c':'out-c'}">${inc?'+':'−'} ${tk(t.amount)}</td></tr>`}).join('')}</tbody></table>
+ <div class="ft">পৃষ্ঠা ${bd(i+1)}/${bd(pg.length)} · এটি কম্পিউটার সিস্টেম দ্বারা প্রস্তুতকৃত।</div></div>`)}
+/* A4 PDF ডাউনলোড (html2canvas + jsPDF, cdnjs থেকে লোড হয়) */
+async function pdfOut(pages,name){
+ if(!window.html2canvas||!window.jspdf)return toast('PDF লাইব্রেরি লোড হয়নি, ইন্টারনেট সংযোগ দেখুন');
+ toast('PDF তৈরি হচ্ছে…');const host=$('cap');
+ try{host.innerHTML=pages.join('');await document.fonts.ready;
+  const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
+  for(let i=0;i<host.children.length;i++){
+   const c=await html2canvas(host.children[i],{scale:2,backgroundColor:'#fff'});
+   let w=210,h=c.height/c.width*210;if(h>297){w=210*297/h;h=297}
+   if(i)doc.addPage();doc.addImage(c.toDataURL('image/jpeg',.92),'JPEG',(210-w)/2,0,w,h)}
+  doc.save(name);toast('ডাউনলোড হয়েছে')
+ }catch(e){toast('PDF তৈরি করা যায়নি')}
+ host.innerHTML=''}
+let curInv=null;
+function fitInv(){const b=$('invBody'),a=b.firstElementChild;if(!a)return;const sc=Math.min(1,(innerWidth-64)/794);
+ b.style.width='794px';b.style.transform=`scale(${sc})`;$('invFit').style.width=794*sc+'px';$('invFit').style.height=a.offsetHeight*sc+'px'}
+function showInv(id){const t=all.find(x=>x.id===id);if(!t)return;curInv=t;$('invBody').innerHTML=invHTML(t);$('invOv').hidden=false;fitInv()}
+window.addEventListener('resize',()=>{if(!$('invOv').hidden)fitInv()});
+$('tb').addEventListener('click',e=>{const b=e.target.closest('.ib');if(!b)return;b.classList.contains('del')?del(b.dataset.id):showInv(b.dataset.id)});
+$('invX').onclick=()=>$('invOv').hidden=true;
+$('invOv').addEventListener('click',e=>{if(e.target.id==='invOv')$('invOv').hidden=true});
+$('invD').onclick=()=>curInv&&pdfOut([invHTML(curInv)],(curInv.type==='income'?'receipt-':'voucher-')+curInv.no.replace(/[^0-9-]/g,'').replace(/^-/,'')+'.pdf');
+$('dlBtn').onclick=()=>pdfOut(rptPages(),'report-'+$('month').value+'.pdf');
 const mkey=d=>d.slice(0,7);
 function calc(){
  const m=$('month').value,cur=all.filter(t=>mkey(t.date)===m),prev=all.filter(t=>mkey(t.date)<m);
@@ -215,12 +299,13 @@ function breakdown(cur,ty,total){
  +`<div class="sub" style="padding:10px 0 0;font-weight:600;color:var(--ink)"><span>মোট</span><span>${tk(total)}</span></div>`;
 }
 async function render(){
- all=await DB.list();open0=await DB.opening();$('open').value=open0||'';$('openSet').hidden=all.length>0;$('openView').hidden=all.length===0;$('openVal').textContent=tk(open0);
+ all=await DB.list();open0=await DB.opening();
+ if(all.some(t=>!t.no||!t.id)){all.forEach((t,i)=>{if(!t.id)t.id='L'+Date.now()+i});all.filter(t=>!t.no).sort((a,b)=>(a.date+a.id).localeCompare(b.date+b.id)).forEach(t=>t.no=nextNo(all,t));await DB.saveAll(all)}$('open').value=open0||'';$('openSet').hidden=all.length>0;$('openView').hidden=all.length===0;$('openVal').textContent=tk(open0);
  const c=calc();
  $('eq').innerHTML=`<div><em class="ic" style="--tb:#f1f5f9;--tc:#475569"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3M3 4v5h5M12 7v5l3 2"/></svg></em><span>পূর্বের জের</span><b>${tk(c.pb)}</b></div><div class="i"><em class="ic" style="--tb:var(--in-bg);--tc:var(--in)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg></em><span>মোট আয়</span><b>${tk(c.I)}</b></div><div class="o"><em class="ic" style="--tb:var(--out-bg);--tc:var(--out)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V8m0 0l-5 5m5-5l5 5M5 4h14"/></svg></em><span>মোট ব্যয়</span><b>${tk(c.O)}</b></div><div><em class="ic" style="--tb:#e0f2fe;--tc:#0369a1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 012-2h13v4M3 7v10a2 2 0 002 2h14a1 1 0 001-1v-9H5a2 2 0 01-2-2zM16 14h2"/></svg></em><span>বর্তমান জের</span><b>${tk(c.cb)}</b></div>`;
  $('bd-in').innerHTML=breakdown(c.cur,'income',c.I);$('bd-out').innerHTML=breakdown(c.cur,'expense',c.O);
  const rows=[...c.cur].sort((a,b)=>b.date.localeCompare(a.date));
- $('tb').innerHTML=rows.length?rows.map(t=>`<tr><td>${bnDate(t.date)}</td><td><span class="badge ${t.type==='income'?'i':'o'}">${t.type==='income'?'আয়':'ব্যয়'}</span></td><td>${esc(t.group)}<br><small style="color:var(--mute)">${esc(t.item)}${t.flat?' · ফ্ল্যাট '+esc(t.flat):''}${t.note?' · '+esc(t.note):''}</small></td><td class="n ${t.type==='income'?'in-c':'out-c'}">${tk(t.amount)}</td><td class="n"><button class="x" aria-label="মুছুন" onclick="del('${t.id}')">✕</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">এই মাসে কোনো লেনদেন নেই। "আয়/ব্যয় এন্ট্রি" থেকে যোগ করুন।</td></tr>';
+ $('tb').innerHTML=rows.length?rows.map(t=>`<tr><td>${bnDate(t.date)}</td><td><span class="badge ${t.type==='income'?'i':'o'}">${t.type==='income'?'আয়':'ব্যয়'}</span></td><td>${esc(t.group)}<br><small style="color:var(--mute)">${esc(t.item)}${t.flat?' · ফ্ল্যাট '+esc(t.flat):''}${t.note?' · '+esc(t.note):''}</small></td><td class="n ${t.type==='income'?'in-c':'out-c'}">${tk(t.amount)}</td><td class="act"><button class="ib inv" data-id="${t.id}" title="ইনভয়েস ${esc(bd(t.no||''))}" aria-label="ইনভয়েস"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg></button><button class="ib del" data-id="${t.id}" title="মুছুন" aria-label="মুছুন"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">এই মাসে কোনো লেনদেন নেই। "আয়/ব্যয় এন্ট্রি" থেকে যোগ করুন।</td></tr>';
 }
 /* মডাল (confirm/prompt কিছু পরিবেশে ব্লক থাকে, তাই নিজস্ব ডায়ালগ) */
 function ask({title,msg='',fields=[],ok='ঠিক আছে'}){return new Promise(res=>{
@@ -235,7 +320,7 @@ function ask({title,msg='',fields=[],ok='ঠিক আছে'}){return new Promi
 })}
 async function del(id){
  const v=await ask({title:'এন্ট্রি মুছবেন?',msg:'এই লেনদেনটি স্থায়ীভাবে মুছে যাবে।',ok:'মুছুন'});
- if(v){await DB.remove(id);toast('মুছে ফেলা হয়েছে');render()}
+ if(v){const n=await DB.remove(id);toast(n?'মুছে ফেলা হয়েছে':'মুছতে ব্যর্থ হয়েছে');render()}
 }
 /* অ্যাডমিন পাসওয়ার্ড (শুধু ব্রাউজারে সংরক্ষিত হ্যাশ; এটি আসল নিরাপত্তা নয়, ভুল করে বদলানো ঠেকায়) */
 async function hash(p){const d=new TextEncoder().encode('kmt|'+p);
